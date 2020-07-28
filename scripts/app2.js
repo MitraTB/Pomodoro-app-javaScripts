@@ -2,6 +2,8 @@ const startButton = document.querySelector('.start-button');
 const displayTimer = document.querySelector('.timer');
 const displayCounter = document.querySelector('.counter');
 const setSituation = document.querySelector('.name_situation');
+const myAudio = document.querySelector('.myAudio');
+const SoundOff = document.querySelector('.sound-player');
 let currentTimeLeft = 10;
 const workTimeSession = 10;
 const breakTimeSession = 5;
@@ -25,6 +27,7 @@ const toggleClock = () =>{
                   startButton.textContent = "start";
                   isWorking = true;
                   setCounter();
+                  playSound();
               }
               displayCurrentTimeLeft();
             },1000  
@@ -68,6 +71,7 @@ const startShortBreakTime = () => {
               isTimeRunning = false;
               isWorking = false;
               startButton.disabled = false;
+              playSound();
           }
           displayCurrentTimeLeft();
         },1000  
@@ -111,8 +115,8 @@ const startLongBreak = ()=>{
               counter = 0;
               currentTimeLeft = workTimeSession;
               displayCounter.textContent = "0 / 4"
-        
-          }
+              playSound();
+            }
           displayCurrentTimeLeft();
         },1000  
       )
@@ -120,8 +124,17 @@ const startLongBreak = ()=>{
     //isTimeRunning = false;
 }
 
+const playSound = ()=>{
+    myAudio.play();
+};
+
+const pauseSound = () =>{
+    myAudio.pause();
+};
+
+
 startButton.addEventListener('click', () => {
-    debugger;
+    //debugger;
     if(isWorking === false){
         toggleClock();
     }
@@ -134,5 +147,7 @@ startButton.addEventListener('click', () => {
         }
     }
 });
-
-
+debugger;
+SoundOff.addEventListener('click' , function() {
+    myAudio.pause();
+});
